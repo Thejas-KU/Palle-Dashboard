@@ -1,113 +1,89 @@
-# Palle-Dashboard
-🌾 Palle Dashboard – Role-Based Institution Management System
-Palle Dashboard is a Role-Based Access Control (RBAC) web application built with Django to efficiently manage employees and students in an educational institution or training center. It features dynamic dashboards based on user roles (Admin & Sales) with secure authentication and data integrity.
+# 🧑‍💼  Palle Dashboard – Role-Based Institution Management System
 
-🚀 Features at a Glance
-👑 Admin Role (Full Access)
-🧑‍💼 Manage Employees – Add, View, Delete
+A *role-based access control (RBAC)* system built using *Django* for managing employees and students efficiently. The project supports two user roles — *Admin* and *Sales* — with different levels of access and dynamic dashboards.
 
-🎓 Manage Students – Add, View, Edit, Delete
+---
 
-🔄 Assign students to any employee via added_by dropdown
+## 📌 Features
 
-📊 Full Admin Dashboard with all data & actions
+### 🔐 Role-Based Permissions
 
-📋 Sales Role (Restricted Access)
-➕ Add Students (auto-assigns added_by to logged-in Sales user)
+| Role  | Permissions |
+|-------|-------------|
+| *Admin (Superuser)* | ✅ Full CRUD on Employees & Students<br>✅ Access to Admin Dashboard<br>✅ Assign students to any employee |
+| *Sales* | ✅ Add Students<br>👁 View-only access to Students<br>🚫 No access to Employees<br>🔒 Cannot edit/delete students |
 
-👀 View Student List (Read-Only)
+---
 
-🚫 Cannot modify/delete students or view employees
+## 🔄 System Workflow
 
-🔐 Authentication & Workflow
-Superuser Creation – via python manage.py createsuperuser
+### 👤 Authentication Flow
+- *Superuser* created using Django's createsuperuser command.
+- Upon login:
+  - *Admins* are redirected to the *Admin Dashboard*.
+  - *Sales* users are redirected to the *Sales Dashboard*.
+- Displays welcome message: "Welcome, [username]".
 
-Role-Based Redirects – Admin → Admin Dashboard | Sales → Sales Dashboard
+### 🧭 Navigation
 
-Personalized Welcome Message – "Welcome, [Username]"
+#### Admin Dashboard
+- 🧑‍💼 Employee List (View/Add/Delete)
+- 🎓 Student List (View/Edit/Delete)
+- 🔒 Logout
+- 🎓 Add Student (select added_by from dropdown)
 
-Secure Session Handling – CSRF protection, proper login/logout
+#### Sales Dashboard
+- ➕ Add Student (auto-filled added_by)
+- 👁 View Students (Read-only)
+- 🔒 Logout
 
-🛠 Tech Stack
-Layer	Technology
-Backend	Python, Django (FBVs, ORM, Authentication)
-Frontend	HTML, Bootstrap, CSS, Django Templates
-Database	MySQL (Normalized Schema)
-Security	Role-Based Access, CSRF Protection, Session Management
+---
 
-📂 System Architecture
-Admin Dashboard
-Navbar: Employee List | Student List | Logout
+## 🧱 Technical Highlights
 
-CRUD Operations on Employees & Students
+- *Backend:* Python, Django (FBVs, ORM)
+- *Frontend:* HTML, CSS, Bootstrap, Django Templates
+- *Database:* MySQL (normalized schema)
 
-Student Creation with full added_by control
+### 🛠 Django Features Used
+- ✅ Function-Based Views for custom logic
+- ✅ Django ORM for database operations (.filter(), .get(), .create(), .update())
+- ✅ ModelForm for form validation and input handling
+- ✅ Django Admin Panel extended with filters and inline editing
+- ✅ Session & Messaging Framework for success/error notifications
+- ✅ CSRF protection enabled for all forms
 
-Sales Dashboard
-Navbar: Add Student | View Students | Logout
+---
 
-Add Student (auto-filled added_by)
+## 🔒 Security & Data Integrity
 
-View Students (read-only)
+- 🔐 Role-based access with conditional rendering
+- 🔐 Auto-controlled added_by field to prevent tampering
+- 🔐 Secure session handling with login/logout redirects
+- 🔐 CSRF tokens enforced in all POST forms
 
-⚡ Technical Highlights
-Django ORM for .filter(), .get(), .create(), .update() operations
+---
 
-Function-Based Views (FBVs) for better control and readability
+## 📦 How to Run Locally
 
-ModelForms for clean form validation & data handling
-
-Django Admin Panel extended with filters & inline edits
-
-Message Framework for success/error notifications
-
-🔒 Security & Data Integrity
-✅ Role-based feature restrictions
-✅ Controlled added_by field (tamper-proof)
-✅ CSRF protection for all POST requests
-✅ Proper session management & redirects
-
-📦 Installation & Setup
 bash
-Copy
-Edit
-# 1️⃣ Clone the repository
-git clone https://github.com/your-username/palle-dashboard.git
-cd palle-dashboard
+# Clone the repository
+git clone https://github.com/your-username/palle-admin-dashboard.git
+cd palle-admin-dashboard
 
-# 2️⃣ Create & activate virtual environment
+# Create virtual environment
 python -m venv venv
-source venv/bin/activate  # For Mac/Linux
-venv\Scripts\activate     # For Windows
+source venv/bin/activate  # On Windows: venv\Scripts\activate
 
-# 3️⃣ Install dependencies
+# Install dependencies
 pip install -r requirements.txt
 
-# 4️⃣ Configure database in settings.py (MySQL)
-# Update NAME, USER, PASSWORD, HOST, PORT
-
-# 5️⃣ Run migrations
+# Migrate the database
 python manage.py makemigrations
 python manage.py migrate
 
-# 6️⃣ Create superuser
+# Create superuser
 python manage.py createsuperuser
 
-# 7️⃣ Run the server
+# Run the server
 python manage.py runserver
-📝 Summary
-Admins → Full CRUD access on employees & students
-
-Sales → Add & view students (read-only)
-
-Dynamic Dashboards → Role-based redirects and navbar options
-
-Clean & Secure → ORM, FBVs, CSRF, Session handling
-
-Scalable → Can easily extend roles & permissions
-
-🤝 Contributing
-Pull requests are welcome! For major changes, please open an issue first to discuss what you’d like to change.
-
-📜 License
-This project is licensed under the MIT License – feel free to use and modify.
